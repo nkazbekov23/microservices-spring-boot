@@ -19,9 +19,9 @@ import java.util.stream.Stream;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClient;
 
-    public OrderService(OrderRepository orderRepository, WebClient webClient) {
+    public OrderService(OrderRepository orderRepository, WebClient.Builder webClient) {
         this.orderRepository = orderRepository;
         this.webClient = webClient;
     }
@@ -40,9 +40,9 @@ public class OrderService {
 
         List<String> skuCodes = order.getOrderLineItems().stream().map(OrderLineItems::getSkuCode).collect(Collectors.toList());
 
-        InventoryResponse[] inventoryResponses = webClient
+        InventoryResponse[] inventoryResponses = webClient.build()
                 .get()
-                .uri("http://localhost:8084/api/inventory", uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+                .uri("http://inventory-service/api/inventory", uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();
