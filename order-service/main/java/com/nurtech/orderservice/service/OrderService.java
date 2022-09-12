@@ -26,7 +26,7 @@ public class OrderService {
         this.webClient = webClient;
     }
 
-    public void orderPlace(OrderRequest orderRequest) {
+    public String orderPlace(OrderRequest orderRequest) {
         if (orderRequest.getOrderLineItems() == null) {
             throw new NullPointerException("order line items null");
         }
@@ -51,6 +51,7 @@ public class OrderService {
         if (match) {
             orderRepository.save(order);
             log.info("order placed with number {}", orderNumber);
+            return "Order placed successfully";
         } else {
             throw new IllegalArgumentException("product is not stock, please try again letter");
         }
