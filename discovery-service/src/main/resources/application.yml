@@ -9,3 +9,5 @@ eureka:
     hostname: localhost
 server:
   port: 8761
+
+
