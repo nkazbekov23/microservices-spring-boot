@@ -20,11 +20,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Backend-Service" target="11" />
       <module name="geteway-service" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Backend-Service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="geteway-service" options="-parameters" />
